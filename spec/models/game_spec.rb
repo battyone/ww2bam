@@ -79,4 +79,14 @@ RSpec.describe Game, type: :model do
       expect(game_w_questions.current_game_question).to eq game_w_questions.game_questions.first
     end
   end
+
+  context 'previous_level' do
+    it 'returns previous game level' do
+      expect(game_w_questions.previous_level).to eq -1
+
+      q = game_w_questions.current_game_question
+      game_w_questions.answer_current_question!(q.correct_answer_key)
+      expect(game_w_questions.previous_level).to eq 0
+    end
+  end
 end
