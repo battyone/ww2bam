@@ -89,4 +89,39 @@ RSpec.describe Game, type: :model do
       expect(game_w_questions.previous_level).to eq 0
     end
   end
+
+  context 'answer_current_question!' do
+    let(:q) { game_w_questions.current_game_question }
+    let(:wrong) { %w[a b c d].delete_if { |a| a == q.correct_answer_key }.sample }
+
+    it 'answer is correct' do
+      expect(game_w_questions.answer_current_question!(q.correct_answer_key)).to be true
+      expect(game_w_questions.current_level).to eq 1
+      expect(game_w_questions.status).to eq :in_progress
+      expect(game_w_questions.finished?).to be false
+    end
+
+    it 'answer is wrong' do
+      expect(game_w_questions.answer_current_question!(wrong)).to be false
+      expect(game_w_questions.status).to eq :fail
+      expect(game_w_questions.finished?).to be true
+    end
+
+    it 'question is last' do
+      game_w_questions.current_level = Question::QUESTION_LEVELS.max
+      game_w_questions.answer_current_question!(q.correct_answer_key)
+
+      expect(game_w_questions.status).to eq :won
+      expect(game_w_questions.finished?).to be true
+      expect(game_w_questions.prize).to eq Game::PRIZES.last
+    end
+
+    it 'timeout' do
+      game_w_questions.created_at = 1.hour.ago
+
+      expect(game_w_questions.answer_current_question!(q.correct_answer_key)).to be false
+      expect(game_w_questions.status).to eq :timeout
+      expect(game_w_questions.finished?).to be true
+    end
+  end
 end
