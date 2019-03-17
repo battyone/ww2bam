@@ -131,7 +131,7 @@ RSpec.describe GamesController, type: :controller do
 
     it 'uses fifty_fifty' do
       expect(game_w_questions.current_game_question.help_hash[:fifty_fifty]).not_to be
-      expect(game_w_questions.audience_help_used).to be false
+      expect(game_w_questions.fifty_fifty_used).to be false
 
       put :help, id: game_w_questions.id, help_type: :fifty_fifty
       game = assigns(:game)
@@ -154,6 +154,20 @@ RSpec.describe GamesController, type: :controller do
       expect(game.audience_help_used).to be true
       expect(game.current_game_question.help_hash[:audience_help]).to be
       expect(game.current_game_question.help_hash[:audience_help].keys).to match_array %w[a b c d]
+      expect(response).to redirect_to(game_path(game))
+    end
+
+    it 'uses friend_call' do
+      expect(game_w_questions.current_game_question.help_hash[:friend_call]).not_to be
+      expect(game_w_questions.friend_call_used).to be false
+
+      put :help, id: game_w_questions.id, help_type: :friend_call
+      game = assigns(:game)
+
+      expect(game.finished?).to be false
+      expect(game.friend_call_used).to be true
+      expect(game.current_game_question.help_hash[:friend_call]).to include('считает, что это вариант')
+      expect(game.current_game_question.help_hash[:friend_call]).to match /A|B|C|D/
       expect(response).to redirect_to(game_path(game))
     end
   end
