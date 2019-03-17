@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20190317120741) do
     t.datetime "updated_at",                         null: false
     t.boolean  "fifty_fifty_used",   default: false, null: false
     t.boolean  "audience_help_used", default: false, null: false
-    t.boolean  "friends_call_used",  default: false, null: false
+    t.boolean  "friend_call_used",   default: false, null: false
   end
 
   add_index "games", ["user_id"], name: "index_games_on_user_id"
