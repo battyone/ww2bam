@@ -12,6 +12,7 @@
         <%= link_to content_tag(:span, letter.upcase, class: 'variant') + ": #{variant}",
                     answer_game_path(game, letter: letter),
                     method: :put,
+                    remote: true,
                     class: 'btn btn-block btn-default btn-variant'
         %>
       </div>
