@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe 'users/show', type: :view do
   context 'somebody watches user page' do
     before(:each) do
-      assign(:user, FactoryGirl.build_stubbed(:user, name: 'Вован'))
-      assign(:games, [FactoryGirl.build_stubbed(:game, id: 22, created_at: Time.now, current_level: 11)])
+      assign(:user, FactoryBot.build_stubbed(:user, name: 'Вован'))
+      assign(:games, [FactoryBot.build_stubbed(:game, id: 22, created_at: Time.now, current_level: 11)])
 
       render
     end
@@ -24,11 +24,11 @@ RSpec.describe 'users/show', type: :view do
 
   context 'user watches own page' do
     before(:each) do
-      user = FactoryGirl.create(:user, name: 'Вован')
+      user = FactoryBot.create(:user, name: 'Вован')
       sign_in user
       assign(:user, user)
 
-      assign(:games, [FactoryGirl.build_stubbed(:game, id: 22, created_at: Time.now, current_level: 11)])
+      assign(:games, [FactoryBot.build_stubbed(:game, id: 22, created_at: Time.now, current_level: 11)])
 
       render
     end

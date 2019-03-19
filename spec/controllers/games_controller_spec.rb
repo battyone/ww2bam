@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'support/my_spec_helper'
 
 RSpec.describe GamesController, type: :controller do
-  let(:user) { FactoryGirl.create(:user) }
-  let(:admin) { FactoryGirl.create(:user, is_admin: true) }
-  let(:game_w_questions) { FactoryGirl.create(:game_with_questions, user: user) }
+  let(:user) { FactoryBot.create(:user) }
+  let(:admin) { FactoryBot.create(:user, is_admin: true) }
+  let(:game_w_questions) { FactoryBot.create(:game_with_questions, user: user) }
 
   context 'Anon' do
     it 'cannot create new game' do
@@ -96,7 +96,7 @@ RSpec.describe GamesController, type: :controller do
     end
 
     it 'cannot call #show foreign game' do
-      foreign_game = FactoryGirl.create(:game_with_questions)
+      foreign_game = FactoryBot.create(:game_with_questions)
       get :show, id: foreign_game.id
 
       expect(response.status).not_to eq 200

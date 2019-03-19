@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'games/help', type: :view do
-  let(:game) { FactoryGirl.build_stubbed(:game) }
+  let(:game) { FactoryBot.build_stubbed(:game) }
   let(:help_hash) { {friend_call: 'Сережа считает, что это вариант D'} }
 
   it 'renders help variant' do

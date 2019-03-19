@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'games/game_question', type: :view do
-  let(:game_question) { FactoryGirl.build_stubbed :game_question }
+  let(:game_question) { FactoryBot.build_stubbed :game_question }
   before(:each) do
     allow(game_question).to receive(:text).and_return('Кому на Руси жить хорошо?')
     allow(game_question).to receive(:variants).and_return(
