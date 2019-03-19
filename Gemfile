@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.10'
 
+gem 'pg', '~> 0.18'
+
 gem 'devise', '~> 4.6.1'
 gem 'devise-i18n'
 
@@ -13,7 +15,6 @@ gem 'font-awesome-rails'
 gem 'russian'
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.3.6'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.4'
   gem 'factory_bot_rails'
@@ -26,8 +27,5 @@ group :test do
 end
 
 group :production do
-  # гем, улучшающий вывод логов на Heroku
-  # https://devcenter.heroku.com/articles/getting-started-with-rails4#heroku-gems
   gem 'rails_12factor'
-  gem 'pg'
 end
