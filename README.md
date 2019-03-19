@@ -25,7 +25,7 @@ $ bundle install
 NB: If you want at the same time create the database, load the schema and initialize it with the seed data run
 
 ```console
-$ rails db:setup
+$ rake db:setup
 ```
 
 Skip Items 2-4 in this case.
@@ -33,19 +33,19 @@ Skip Items 2-4 in this case.
 2. Create database
 
 ```console
-$ rails db:create
+$ rake db:create
 ```
 
 3. Run database migrations
 
 ```console
-$ rails db:migrate
+$ rake db:migrate
 ```
 
 4. If you want to populate your database with seed data run
 
 ```console
-$ rails db:seed
+$ rake db:seed
 ```
 
 5. To make the user says with id `7` admin run
